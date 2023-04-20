@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WorkerDetailScreen extends StatefulWidget {
   final String phoneNumber;
@@ -28,6 +29,7 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
   bool _visibel = false;
   bool _uploadAdharBool = true;
   bool _AccsesLocationBool = true;
+
 
   final List<String> CatList = [
     'Mechanic',
@@ -117,8 +119,10 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
     if (_nameController.text.trim().isNotEmpty &&
         _addressController.text.trim().isNotEmpty &&
         Cat.isNotEmpty &&
-        city!.trim().isNotEmpty &&
-        local!.trim().isNotEmpty) {
+        city!.trim().isNotEmpty /*&&
+        local!.trim().isNotEmpty*/) {
+      final SharedPreferences pref = await SharedPreferences.getInstance();
+
       if (_adharcard == null) {
         showSnakBar('Upload your Adharcard', context);
       } else if (_image == null) {
@@ -127,7 +131,7 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
         if (Subcat.isNotEmpty) {
           await AuthMethods().signUpWorker(
             city: city!,
-            local: local!,
+            local: local != null ? local! : "1" ,
             name: _nameController.text,
             phone: widget.phoneNumber,
             address: _addressController.text,
@@ -136,6 +140,7 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
             adharcardPhoto: _adharcard!,
             profilePhoto: _image!,
           );
+          pref.setBool('isWorker', true);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: ((context) => const HomeScreen())));
         } else {
@@ -150,6 +155,8 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
             adharcardPhoto: _adharcard!,
             profilePhoto: _image!,
           );
+
+          pref.setBool('isWorker', true);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: ((context) => const HomeScreen())));
         }

@@ -1,4 +1,3 @@
-
 import 'package:areamen/models/user_model.dart';
 import 'package:areamen/utils/auth_methods.dart';
 import 'package:flutter/material.dart';

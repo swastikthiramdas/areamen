@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerScreen extends StatefulWidget {
   final String phoneNumber;
@@ -71,6 +72,11 @@ class _CustomerScreenState extends State<CustomerScreen> {
           city: city!,
           local: local!,
         );
+
+
+        var pref = await SharedPreferences.getInstance();
+
+        pref.setBool('isWorker', false);
 
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: ((context) => const HomeScreen())));
@@ -156,7 +162,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                 MaterialButton(
                   padding: const EdgeInsets.all(10),
                   minWidth: double.maxFinite,
-                  onPressed: () {},
+                  onPressed: () => StoreCredentionToFirebase(context),
                   child: Text('Continue'),
                   color: Colors.blueAccent,
                 )

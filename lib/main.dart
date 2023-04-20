@@ -2,6 +2,7 @@ import 'package:areamen/provider/user_provider.dart';
 import 'package:areamen/screens/home_screen.dart';
 import 'package:areamen/screens/main_screen.dart';
 import 'package:areamen/screens/phone_screen.dart';
+import 'package:areamen/screens/splash_screen.dart';
 import 'package:areamen/screens/worker_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
-        )
+        ),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                return HomeScreen();
+                return SplashScreen();
               } else if (snapshot.hasError) {
                 return const Center(
                   child: Text('Something went wrong'),

@@ -81,6 +81,7 @@ class _SubCatScreenState extends State<SubCatScreen> {
               margin: const EdgeInsets.all(10),
               width: 200,
               height: 180,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.redAccent,
                 borderRadius: BorderRadius.circular(10),
@@ -91,6 +92,7 @@ class _SubCatScreenState extends State<SubCatScreen> {
                   style: TextStyle(
                     fontSize: 16,
                   ),
+                  maxLines: 2,
                 ),
               ),
             ),

@@ -1,9 +1,12 @@
+import 'package:areamen/provider/user_provider.dart';
 import 'package:areamen/screens/all_workers_screen.dart';
 import 'package:areamen/screens/subscat.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -20,7 +23,6 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     getLocation();
   }
-
 
   void getLocation() async {
     await Geolocator.checkPermission();
@@ -72,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
                   MaterialPageRoute(
                     builder: (context) => SubCatScreen(
                       cats: cats[index],
-                      local: local,
+                      local: local != null ? local : "1",
                     ),
                   ),
                 );
@@ -81,8 +83,8 @@ class _MainScreenState extends State<MainScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => AllWorkerScreen(
-                      cat: "Electrician",
-                      local: local,
+                      cat: cats[index],
+                      local: local != null ? local : "1",
                     ),
                   ),
                 );

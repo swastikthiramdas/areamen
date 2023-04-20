@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:areamen/models/customer_model.dart';
 import 'package:areamen/models/user_model.dart';
 import 'package:areamen/screens/phone_screen.dart';
 import 'package:areamen/utils/storage_methods.dart';
@@ -20,6 +19,7 @@ class AuthMethods {
     return UserModel.fromSnap(snap);
   }
 
+
   Future<String> signUpWorker({
     required String name,
     required String phone,
@@ -35,10 +35,10 @@ class AuthMethods {
 
     try {
       final adharcard = await StorageMethod()
-          .uploadImageToStorage('adharcards/', adharcardPhoto, true);
+          .uploadImageToStorage('adharcards/', adharcardPhoto);
 
       final profileurl = await StorageMethod()
-          .uploadImageToStorage('profilePhotos/', profilePhoto, true);
+          .uploadImageToStorage('profilePhotos/', profilePhoto);
 
       final String uid = _auth.currentUser!.uid;
 
@@ -75,18 +75,18 @@ class AuthMethods {
     try {
 
       final profileurl = await StorageMethod()
-          .uploadImageToStorage('profilePhotos/', profilePhoto, true);
+          .uploadImageToStorage('profilePhotos/', profilePhoto);
 
       final String uid = _auth.currentUser!.uid;
 
 
-      final user = CustomerModel(
+      final user = UserModel(
         city: city,
         local: local,
         profileUrl: profileurl,
         phone: phone,
         uid: uid,
-        name: name,
+        name: name, address: '', mainCat: '', subCat: '', adharCardUrl: '',
       );
 
       await _firestore.collection('users').doc(uid).set(user.toJason());

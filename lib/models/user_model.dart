@@ -26,7 +26,7 @@ class UserModel{
   });
 
   Map<String, dynamic> toJason() => {
-    'photoUrl': profileUrl,
+    'profileUrl': profileUrl,
     'phone': phone,
     'uid': uid,
     'city': city,
