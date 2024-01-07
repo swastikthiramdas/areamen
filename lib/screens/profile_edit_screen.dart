@@ -11,8 +11,8 @@ import '../utils/firestore_methods.dart';
 class ProfileEditScreen extends StatefulWidget {
   final String name;
   final String address;
-  final String cat;
-  final String subCat;
+  final String? cat;
+  final String? subCat;
   final String url;
   final String id;
 
@@ -22,7 +22,7 @@ class ProfileEditScreen extends StatefulWidget {
     required this.id,
     required this.name,
     required this.address,
-    required this.cat, required this.subCat,
+    this.cat,this.subCat,
   }) : super(key: key);
 
   @override
@@ -89,11 +89,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   @override
   void initState() {
     super.initState();
-    _nameController.text = widget.name;
-    _addressController.text = widget.address;
-    Cat = widget.cat;
-    AddSubCat();
-    Subcat = widget.subCat;
+    setState(() {
+      _nameController.text = widget.name;
+      _addressController.text = widget.address;
+      Cat = widget.cat ?? '';
+      AddSubCat();
+      Subcat = widget.subCat ?? '';
+    });
   }
 
 
@@ -156,7 +158,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
           'Profile',
           style: TextStyle(color: Colors.black),
@@ -195,7 +197,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             onPressed: () {
                                updateValues();
                             },
-                            icon: Icon(Icons.check),
+                            icon: const Icon(Icons.check),
                           ),
                         )
                       ],
@@ -242,9 +244,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    DropdownButton<String>(
+                    widget.cat != '' ? DropdownButton<String>(
                       isExpanded: true,
-                      value: Cat,
+                      value: Cat ?? "hello",
                       icon: const Icon(Icons.arrow_downward),
                       elevation: 16,
                       style: const TextStyle(color: Colors.black),
@@ -261,10 +263,10 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           child: Text(value),
                         );
                       }).toList(),
-                    ),
+                    ) : const SizedBox(),
                     SizedBox(height: 10),
                     //SubCatList
-                    Visibility(
+                    widget.subCat != '' ? Visibility(
                       visible: ShowSubCat,
                       child: DropdownButton<String>(
                         isExpanded: true,
@@ -290,7 +292,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           );
                         }).toList(),
                       ),
-                    ),
+                    ) : const SizedBox(),
                   ],
                 ),
               ),

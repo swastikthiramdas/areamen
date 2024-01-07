@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../provider/user_provider.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -26,33 +25,23 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-
   @override
   void initState() {
     super.initState();
     addData();
   }
 
-
-
-
   addData() async {
-
     var prefs = await SharedPreferences.getInstance();
     // bool? custommer = await prefs.getBool('isWorker');
 
     // print("addData Run");
 
-    UserProvider _userProvider = Provider.of(context , listen: false);
+    UserProvider _userProvider = Provider.of(context, listen: false);
     await _userProvider.refreshUser();
 
     // print(custommer);
   }
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {

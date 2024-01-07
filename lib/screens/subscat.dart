@@ -83,8 +83,12 @@ class _SubCatScreenState extends State<SubCatScreen> {
               height: 180,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Colors.redAccent,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1.5,
+                ),
               ),
               child: Center(
                 child: Text(

@@ -4,7 +4,6 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import '../utils/photoview_widget.dart';
 import '../utils/profile_text.dart';
 
-
 class WorkersViewScreen extends StatelessWidget {
   final String url;
   final String name;
@@ -14,7 +13,18 @@ class WorkersViewScreen extends StatelessWidget {
   final String adharcard;
   final String city;
   final String local;
-  const WorkersViewScreen({Key? key, required this.url, required this.name, required this.address, required this.phoneNo, required this.Cat,required this.adharcard, required this.city, required this.local}) : super(key: key);
+
+  const WorkersViewScreen({
+    Key? key,
+    required this.url,
+    required this.name,
+    required this.address,
+    required this.phoneNo,
+    required this.Cat,
+    required this.adharcard,
+    required this.city,
+    required this.local,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +46,13 @@ class WorkersViewScreen extends StatelessWidget {
             child: Container(
               width: 300,
               padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: Colors.white
-              ),
+              decoration: BoxDecoration(color: Colors.white),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: 10),
-                   CircleAvatar(
+                  CircleAvatar(
                     radius: 34,
                     backgroundImage: NetworkImage(url),
                   ),
@@ -68,23 +76,23 @@ class WorkersViewScreen extends StatelessWidget {
                     cat: 'Category',
                     data: Cat,
                   ),
-
                   SizedBox(height: 10),
                   ProfileText(
                     cat: 'Location',
-                    data: "${city!}",
+                    data: "${city}",
                   ),
                   SizedBox(height: 10),
                   ProfileText(
                     cat: 'Sub Location',
-                    data: "${local!}",
+                    data: "${local}",
                   ),
-
                   SizedBox(height: 10),
                   SizedBox(
                     height: 200,
                     width: 300,
-                    child: PhotoViewWidget(url: adharcard,),
+                    child: PhotoViewWidget(
+                      url: adharcard,
+                    ),
                   ),
                   GestureDetector(
                     onTap: () async {

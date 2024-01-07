@@ -88,19 +88,16 @@ class _AllWorkerScreenState extends State<AllWorkerScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         iconTheme: const IconThemeData(color: Colors.black),
-        title: TextField(
-          decoration: const InputDecoration(hintText: "Enter your locality"),
-          onChanged: (val) {
-            setState(() {
-              value = val;
-            });
-          },
+        title: Text(
+          widget.cat,
+          style: TextStyle(fontSize: 15, color: Colors.black),
         ),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('users')
             .where('subCat', isEqualTo: widget.cat)
+            .where('local', isEqualTo: widget.local)
             .snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<dynamic, dynamic>>> snapshot) {
@@ -158,7 +155,7 @@ class _AllWorkerScreenState extends State<AllWorkerScreen> {
                   )
                 : const Center(
                     child: Text(
-                      'No Data Avalabel',
+                      'No Data Available',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

@@ -1,6 +1,4 @@
 import 'dart:typed_data';
-
-import 'package:areamen/main.dart';
 import 'package:areamen/screens/home_screen.dart';
 import 'package:areamen/utils/auth_methods.dart';
 import 'package:areamen/utils/utils.dart';
@@ -73,13 +71,12 @@ class _CustomerScreenState extends State<CustomerScreen> {
           local: local!,
         );
 
-
         var pref = await SharedPreferences.getInstance();
 
         pref.setBool('isWorker', false);
 
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: ((context) => const HomeScreen())));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: ((context) => const HomeScreen())));
       }
     } else {
       showSnakBar('Enter the details', context);
@@ -119,7 +116,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                           Icons.add_a_photo_rounded,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
                 Container(

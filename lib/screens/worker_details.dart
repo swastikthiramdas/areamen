@@ -30,7 +30,6 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
   bool _uploadAdharBool = true;
   bool _AccsesLocationBool = true;
 
-
   final List<String> CatList = [
     'Mechanic',
     'Electrician',
@@ -117,10 +116,11 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
 
   void StoreCredentionToFirebase() async {
     if (_nameController.text.trim().isNotEmpty &&
-        _addressController.text.trim().isNotEmpty &&
-        Cat.isNotEmpty &&
-        city!.trim().isNotEmpty /*&&
-        local!.trim().isNotEmpty*/) {
+            _addressController.text.trim().isNotEmpty &&
+            Cat.isNotEmpty &&
+            city!.trim().isNotEmpty /*&&
+        local!.trim().isNotEmpty*/
+        ) {
       final SharedPreferences pref = await SharedPreferences.getInstance();
 
       if (_adharcard == null) {
@@ -128,38 +128,24 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
       } else if (_image == null) {
         showSnakBar('Select an profile picture', context);
       } else if (_adharcard != null && _image != null) {
-        if (Subcat.isNotEmpty) {
-          await AuthMethods().signUpWorker(
-            city: city!,
-            local: local != null ? local! : "1" ,
-            name: _nameController.text,
-            phone: widget.phoneNumber,
-            address: _addressController.text,
-            mainCat: Cat,
-            subCat: Subcat,
-            adharcardPhoto: _adharcard!,
-            profilePhoto: _image!,
-          );
-          pref.setBool('isWorker', true);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: ((context) => const HomeScreen())));
-        } else {
-          await AuthMethods().signUpWorker(
-            city: city!,
-            local: local!,
-            name: _nameController.text,
-            phone: widget.phoneNumber,
-            address: _addressController.text,
-            mainCat: Cat,
-            subCat: Cat,
-            adharcardPhoto: _adharcard!,
-            profilePhoto: _image!,
-          );
-
-          pref.setBool('isWorker', true);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: ((context) => const HomeScreen())));
-        }
+        await AuthMethods().signUpWorker(
+          city: city!,
+          local: local ?? "1",
+          name: _nameController.text,
+          phone: widget.phoneNumber,
+          address: _addressController.text,
+          mainCat: Cat,
+          subCat: Subcat.trim() ?? Cat,
+          adharcardPhoto: _adharcard!,
+          profilePhoto: _image!,
+        );
+        pref.setBool('isWorker', true);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: ((context) => const HomeScreen()),
+          ),
+        );
       }
     } else {
       print(_nameController.text);
@@ -180,14 +166,15 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
         child: SingleChildScrollView(
           child: Stack(
             children: [
-              Center(
+              Align(
+                alignment: Alignment.center,
                 child: Visibility(
                   visible: _visibel,
                   child: const CircularProgressIndicator(),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const  EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -210,7 +197,7 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
                           left: 60,
                           child: IconButton(
                             onPressed: () => selectProfile(),
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.add_a_photo_rounded,
                             ),
                           ),
@@ -219,15 +206,15 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
                     ),
                     Container(
                       width: 350,
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
                         border: Border(
                           bottom: BorderSide(),
                         ),
                       ),
                       child: TextField(
                         controller: _nameController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           icon: Icon(Icons.account_circle),
                           hintText: 'Name',
                           hintStyle: TextStyle(fontSize: 12),
@@ -239,17 +226,17 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     //Address
                     Container(
                       width: 350,
-                      padding: EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         border: Border(bottom: BorderSide()),
                       ),
                       child: TextField(
                         controller: _addressController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           icon: Icon(Icons.location_pin),
                           hintText: 'Address',
                           hintStyle: TextStyle(fontSize: 12),
@@ -261,7 +248,7 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // CatList
                     DropdownButton<String>(
                       isExpanded: true,
@@ -283,7 +270,7 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
                         );
                       }).toList(),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     //SubCatList
                     Visibility(
                       visible: ShowSubCat,
@@ -312,7 +299,7 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
                         }).toList(),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // Upload Adharcard
                     MaterialButton(
                       onPressed: () {
@@ -322,10 +309,10 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
                           showSnakBar('Adharcard Alredy Uploaded', context);
                         }
                       },
-                      child: Text('Click to Upload Adharcard'),
+                      child: const Text('Click to Upload Adharcard'),
                       color: Colors.redAccent,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // Location Accses
                     MaterialButton(
                       onPressed: () async {
@@ -339,10 +326,10 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
                         }
                         print('location working');
                       },
-                      child: const Text('Give your location Accses'),
+                      child: const Text('Give location Accses'),
                       color: Colors.greenAccent,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // Continue Button
                     MaterialButton(
                       padding: const EdgeInsets.all(10),
@@ -353,7 +340,7 @@ class _WorkerDetailScreenState extends State<WorkerDetailScreen> {
                         });
                         StoreCredentionToFirebase();
                       },
-                      child: Text('Continue'),
+                      child: const Text('Continue'),
                       color: Colors.blueAccent,
                     ),
                   ],

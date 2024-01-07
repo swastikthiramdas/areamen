@@ -89,7 +89,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 SizedBox(
                   height: size.height / 13.6,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () async {
                     if (_countrycode.isNotEmpty &&
                         _PhoneControler.text.trim().isNotEmpty &&

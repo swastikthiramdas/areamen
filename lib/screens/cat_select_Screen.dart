@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class SelectCatScreen extends StatefulWidget {
   final phoneNumber;
-  SelectCatScreen({Key? key,required this.phoneNumber}) : super(key: key);
+
+  SelectCatScreen({Key? key, required this.phoneNumber}) : super(key: key);
 
   @override
   State<SelectCatScreen> createState() => _SelectCatScreenState();
@@ -21,18 +22,18 @@ class _SelectCatScreenState extends State<SelectCatScreen> {
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
               image: isHandyman
-                  ? AssetImage('images/handyman.png')
-                  : AssetImage('images/customer.png'),
+                  ? const AssetImage('images/handyman.png')
+                  : const AssetImage('images/customer.png'),
             ),
             border: Border.all(
               color: Colors.black,
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           isHandyman ? 'Handyman' : 'Customer',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
@@ -48,20 +49,23 @@ class _SelectCatScreenState extends State<SelectCatScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Select Category',
             style: TextStyle(fontWeight: FontWeight.w900),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               GestureDetector(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => WorkerDetailScreen(phoneNumber: widget.phoneNumber,))));
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => WorkerDetailScreen(
+                              phoneNumber: widget.phoneNumber,
+                            ))),
+                  );
                 },
                 child: SelectCat(true),
               ),
@@ -70,7 +74,9 @@ class _SelectCatScreenState extends State<SelectCatScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: ((context) => CustomerScreen(phoneNumber: widget.phoneNumber,))));
+                          builder: ((context) => CustomerScreen(
+                                phoneNumber: widget.phoneNumber,
+                              ))));
                 },
                 child: SelectCat(false),
               ),

@@ -34,8 +34,8 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
           child: Center(
             child: Container(
               width: 250,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(color: Colors.white),
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(color: Colors.white),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +55,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                                       cat: _user.mainCat!, subCat: _user.subCat!,
                                     ))));
                           },
-                          icon: Icon(Icons.edit_outlined),
+                          icon: const Icon(Icons.edit_outlined),
                         ),
                       )
                     ],
@@ -77,24 +77,30 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                     data: _user.name!,
                   ),
                   SizedBox(height: 10),
-                  ProfileText(
-                    cat: 'Address',
-                    data: _user.address!,
-                  ),
+                  _user.address! != '' ? SizedBox(
+                    width: 240,
+                    child: ProfileText(
+                      cat: 'Address',
+                      data: _user.address!,
+                    ),
+                  ) : SizedBox(),
                   SizedBox(height: 10),
                   ProfileText(
                     cat: 'Phone No',
                     data: _user.phone!,
                   ),
                   SizedBox(height: 10),
-                  ProfileText(
+                  _user.subCat! != '' ? ProfileText(
                     cat: 'Category',
                     data: _user.subCat!,
-                  ),
+                  ) : SizedBox(),
                   SizedBox(height: 10),
-                  ProfileText(
-                    cat: 'Location',
-                    data: "${_user.city!} ${_user.local!}",
+                  SizedBox(
+                    width: 240,
+                    child: ProfileText(
+                      cat: 'Location',
+                      data: "${_user.city!} ${_user.local!}",
+                    ),
                   ),
                 ],
               ),

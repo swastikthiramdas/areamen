@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class ProfileText extends StatelessWidget {
   final String cat;
   final String data;
-  const ProfileText({Key? key, required this.cat, required this.data}) : super(key: key);
+
+  const ProfileText({Key? key, required this.cat, required this.data})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +14,20 @@ class ProfileText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text("${cat} :", style: TextStyle(fontSize: 16 , color: Colors.black , fontWeight: FontWeight.bold),),
+          Flexible(
+            child: Text(
+              "${cat} :",
+              style: TextStyle(
+                  fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+            ),
+          ),
           SizedBox(width: 10),
-          Text(data ,  style: TextStyle(fontSize: 16 , color: Colors.black , fontWeight: FontWeight.bold),)
+          Flexible(
+              child: Text(
+            data,
+            style: TextStyle(
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+          ))
         ],
       ),
     );

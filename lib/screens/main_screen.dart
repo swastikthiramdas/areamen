@@ -50,6 +50,13 @@ class _MainScreenState extends State<MainScreen> {
       'Appliances Repair',
       'Furniture Repair'
     ];
+    final catImages = [
+      'images/mechanic.png',
+      'images/electrician.png',
+      'images/plumber.png',
+      'images/ap_repair.png',
+      'images/furniture_repair.png'
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +81,7 @@ class _MainScreenState extends State<MainScreen> {
                   MaterialPageRoute(
                     builder: (context) => SubCatScreen(
                       cats: cats[index],
-                      local: local != null ? local : "1",
+                      local: local ?? "1",
                     ),
                   ),
                 );
@@ -84,26 +91,36 @@ class _MainScreenState extends State<MainScreen> {
                   MaterialPageRoute(
                     builder: (context) => AllWorkerScreen(
                       cat: cats[index],
-                      local: local != null ? local : "1",
+                      local: local ?? "1",
                     ),
                   ),
                 );
               }
             },
-            child: Container(
-              height: 100,
-              width: 100,
-              margin: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  cats[index],
-                  style: TextStyle(fontSize: 18),
-                  textAlign: TextAlign.center,
-                ),
+            child: SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 100,
+                    width: 100,
+                    margin: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(catImages[index]),
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.fitWidth
+                      ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  Text(
+                    cats[index],
+                    style: const TextStyle(fontSize: 18),
+                    textAlign: TextAlign.center,
+                  )
+                ],
               ),
             ),
           );
