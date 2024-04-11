@@ -26,7 +26,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
       'https://imgs.search.brave.com/W8c9qYhrPNdwQjy6g2H3CSfURSFpzuXMxv5O5-eqnf8/rs:fit:1200:976:1/g:ce/aHR0cHM6Ly9pLnN0/YWNrLmltZ3VyLmNv/bS9sNjBIZi5wbmc';
   bool _visibel = false;
 
-  final _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   void getLocation() async {
     await Geolocator.checkPermission();
