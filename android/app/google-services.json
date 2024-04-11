@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "916167688031",
-    "project_id": "area-men",
-    "storage_bucket": "area-men.appspot.com"
+    "project_number": "203021407867",
+    "project_id": "area-men-new",
+    "storage_bucket": "area-men-new.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:916167688031:android:1f9e6cc88f6d76ab4ec0ea",
+        "mobilesdk_app_id": "1:203021407867:android:c7c80484745ea90b4434de",
         "android_client_info": {
           "package_name": "com.example.areamen"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "203021407867-4rkombfpavl9n57fe06nk4u8sagd5sjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDW_Yd9vDJ73jEvLj6mvJkoG9RFm8TI5zc"
+          "current_key": "AIzaSyA1mZjx4sxaq3we5S8mQEmuhtcH8C_pKdQ"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203021407867-4rkombfpavl9n57fe06nk4u8sagd5sjc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
