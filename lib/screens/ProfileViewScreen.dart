@@ -1,7 +1,9 @@
 import 'package:areamen/models/user_model.dart';
 import 'package:areamen/provider/user_provider.dart';
+import 'package:areamen/screens/phone_screen.dart';
 import 'package:areamen/screens/profile_edit_screen.dart';
 import 'package:areamen/utils/profile_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -52,7 +54,8 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                                       id: _user.uid!,
                                       name: _user.name!,
                                       address: _user.address!,
-                                      cat: _user.mainCat!, subCat: _user.subCat!,
+                                      cat: _user.mainCat!,
+                                      subCat: _user.subCat!,
                                     ))));
                           },
                           icon: const Icon(Icons.edit_outlined),
@@ -77,23 +80,27 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                     data: _user.name!,
                   ),
                   SizedBox(height: 10),
-                  _user.address! != '' ? SizedBox(
-                    width: 240,
-                    child: ProfileText(
-                      cat: 'Address',
-                      data: _user.address!,
-                    ),
-                  ) : SizedBox(),
+                  _user.address! != ''
+                      ? SizedBox(
+                          width: 240,
+                          child: ProfileText(
+                            cat: 'Address',
+                            data: _user.address!,
+                          ),
+                        )
+                      : SizedBox(),
                   SizedBox(height: 10),
                   ProfileText(
                     cat: 'Phone No',
                     data: _user.phone!,
                   ),
                   SizedBox(height: 10),
-                  _user.subCat! != '' ? ProfileText(
-                    cat: 'Category',
-                    data: _user.subCat!,
-                  ) : SizedBox(),
+                  _user.subCat! != ''
+                      ? ProfileText(
+                          cat: 'Category',
+                          data: _user.subCat!,
+                        )
+                      : SizedBox(),
                   SizedBox(height: 10),
                   SizedBox(
                     width: 240,
@@ -102,6 +109,22 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                       data: "${_user.city!} ${_user.local!}",
                     ),
                   ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: TextButton(
+                      onPressed: () {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PhoneScreen()));
+                      },
+                      child: Text(
+                        'Logout',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

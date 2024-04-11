@@ -61,7 +61,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'AreaMen',
+          'HandyHub',
           style: TextStyle(color: Colors.black87),
         ),
         centerTitle: true,
